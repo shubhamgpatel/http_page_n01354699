@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="places.Master.cs" Inherits="final_project.wordpress" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="Content/style.css" rel="stylesheet" type="text/css" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <title>Dashboard</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="header">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar">
+            
+            <div class="logo">
+                <a href="#">
+                    <img src="images/logo.png" alt="Admin" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content">
+                <nav class="navbar-sidebar">
+                    <ul class="navbar_list">
+                        <li> <a href="main_content.aspx"><span class="fas fa-tachometer-alt"></span>Dashboard </a></li>
+                        <li><a href="main_content.aspx"><span class="fas fa-chart-bar"></span>Pages</a></li>
+                        <li><span class="fas fa-table"></span>Tables</li>
+                        <li><span class="far fa-check-square"></span>Forms</li>  
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+        <header class="header-desktop">
+                <div class="section__content">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                         <img src="images/logo.jpg" class="admin_img" alt="Admin Photo" />
+                       
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+    </div>
+ 
+    <form id="form1" runat="server">
+         <aside class="main_content ">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </aside>
+    </form>
+    <footer>
+
+    </footer>
+</body>
+</html>
