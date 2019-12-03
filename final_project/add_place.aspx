@@ -16,11 +16,11 @@
                     <div>
                         <!-- https://asp.net-tutorials.com/controls/file-upload-control/ -->
                         <!-- https://stackoverflow.com/questions/569565/uploading-files-in-asp-net-without-using-the-fileupload-server-control -->
-                       <asp:FileUpload id="FileUploadControl" runat="server" />
+                       
 
                     </div>
                        <asp:Button OnClick="Add_Place" Text="Add Place" CssClass="create_btn" runat="server" />
                     </div>
-                    </div>
+           </div>
       <a href="main_content.aspx" title="View Places!!"><span class="glyphicon glyphicon-chevron-left"></span></a>
 </asp:Content>

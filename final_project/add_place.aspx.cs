@@ -11,26 +11,49 @@ namespace final_project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
         protected void Add_Place(object sender, EventArgs e)
         {
             //create connection
-            HTTP_Places db = new HTTP_Places();
+            HTTP_Places place1 = new HTTP_Places();
+            //create a new particular place
+            Place new_place = new Place();
 
-            //create a new particular student
-            Student new_student = new Student();
-            //set that student data
-            new_student.SetFname(student_fname.Text);
-            new_student.SetLname(student_lname.Text);
-            new_student.SetNumber(student_number.Text);
-            new_student.SetEnrolDate(DateTime.Now);
+
+            new_place.SetPlacetitle(create_place_title.Text);
+            new_place.SetPlaceDes(create_description.Text);
+            
+           new_place.Setcreated_on(DateTime.Now);
+
+
+            //https://support.microsoft.com/en-ca/help/323246/how-to-upload-a-file-to-a-web-server-in-asp-net-by-using-visual-c-net
+            /*try
+            {
+                if ((image_url_upload != null) && (image_url_upload.PostedFile.ContentLength > 0))
+                {
+                    string img_upload = System.IO.Path.GetFileName(image_url_upload.FileName);
+                    new_place.SetPlaceImage(img_upload);
+                    // string SaveLocation = Server.MapPath("Data") + "/images/" + img_upload;
+
+                    // image_url_upload.PostedFile.SaveAs(SaveLocation);
+                    Response.Write("The image has been uploaded.");
+                }
+                else
+                {
+                    Response.Write("Please select a file to upload.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error: " + ex.Message);
+
+            }
+            */
 
             //add the student to the database
-            db.AddStudent(new_student);
-
-
-            Response.Redirect("ListStudents.aspx");
+            place1.AddPlace(new_place);
+            Response.Redirect("main_content.aspx");
         }
 
     }

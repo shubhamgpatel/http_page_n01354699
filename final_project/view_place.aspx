@@ -11,7 +11,7 @@
 				<div class="panel-body">
                     <div class="col-md-8 col-lg-8 col-sm-8 view_place_content">
                         <span class="place_error" runat="server"></span>
-     
+     <ASP:Button OnClientClick="if(!confirm('Are you sure you want to delete this?')) return false;" OnClick="DeletePlace_aspx" CssClass="" Text="Delete" runat="server"/>   
                         <dl class="dl-horizontal" runat="server">
                           <dt>Place Title:</dt>
                           <dd><span id="place_title" class="" runat="server"></span></dd>

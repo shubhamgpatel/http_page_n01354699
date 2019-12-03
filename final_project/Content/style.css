@@ -113,6 +113,10 @@ ul.navbar_list{
     text-shadow: 0px 0px 3px;
     font-size: 20px;
 }
+.place_desc_subs{
+    text-overflow:ellipsis;
+
+}
 .add_place_btn {
     font-size: 25px;
     float: right;

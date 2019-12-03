@@ -11,9 +11,9 @@ namespace final_project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string placeid = Request.QueryString["placeid"];
-            if (!String.IsNullOrEmpty(placeid))
-            {
+                string placeid = Request.QueryString["placeid"];
+                if (!String.IsNullOrEmpty(placeid))
+                {
                 var db = new HTTP_Places();
                 Dictionary<String, String> place_record = db.FindPlace(Int32.Parse(placeid));
 
@@ -42,6 +42,21 @@ namespace final_project
                 place_error.InnerHtml = "Sorry!!!There was an error finding that student.";
             }
             */
+        }
+        protected void DeletePlace_aspx(object sender, EventArgs e)
+        {
+            bool valid = true;
+            string placeid = Request.QueryString["placeid"];
+            if (String.IsNullOrEmpty(placeid)) valid = false;
+
+            HTTP_Places place_connect = new HTTP_Places();
+
+            //deleting the student from the system
+            if (valid)
+            {
+                place_connect.DeletePlace(Int32.Parse(placeid));
+                Response.Redirect("main_content.aspx");
+            }
         }
     }
 }
