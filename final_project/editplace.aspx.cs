@@ -11,37 +11,72 @@ namespace final_project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //bool valid = true;
-            string placeid = Request.QueryString["placeid"];
-            if (!String.IsNullOrEmpty(placeid))
+            if (!Page.IsPostBack)
             {
-                var http_place = new HTTP_Places();
-                var edit_place = new Place();
-                //Dictionary<String, String> specific_place = edit_place.FindPlace(Int32.Parse(placeid));
+                //this connection instance is for showing data
+                HTTP_Places hp = new HTTP_Places();
+              display_place(hp);
+            }
+        }
+        protected void display_place(HTTP_Places hp)
+        {
 
+            bool valid = true;
+            string place_id = Request.QueryString["placeid"];
+            if (String.IsNullOrEmpty(place_id)) valid = false;
 
+            //We will attempt to get the record we need
+            if (valid)
+            {
+
+                Place place_record = hp.FindPlace(Int32.Parse(place_id));
+                edit_place_title.Text = place_record.GetPlacetitle();
+                edit_description.Text = place_record.GetPlaceDesc();
+                created_on.Text = place_record.Getcreated_on().ToString();
+            }
+          
+
+            if (!valid)
+            {
+                edit_place_panel.InnerHtml = "There was an error finding that place.";
+            }
+        }
+        protected void edit_place(object sender, EventArgs e)
+        {
+
+            //this connection instance is for editing data
+            HTTP_Places hp = new HTTP_Places();
+
+            bool valid = true;
+            string placeid = Request.QueryString["placeid"];
+            if (String.IsNullOrEmpty(placeid)) valid = false;
+            if (valid)
+            {
+                Place edit_place = new Place();
+                //set that student data
                 edit_place.SetPlacetitle(edit_place_title.Text);
-                edit_place.SetPlaceDes(create_description.Text);
-                edit_place.Setcreated_on(DateTime.ParseExact(created_on.Text, "yyyy-mm-dd H:mm:ss", null));
+                edit_place.SetPlaceDes(edit_description.Text);
 
+                //add the student to the database
                 try
                 {
-                    http_place.UpdatePlace(Int32.Parse(placeid), edit_place);
+                    hp.UpdatePlace(Int32.Parse(placeid), edit_place);
                     Response.Redirect("view_place.aspx?placeid=" + placeid);
                 }
                 catch
                 {
-                    //valid = false;
+                    valid = false;
                 }
+
             }
-            else
+
+            if (!valid)
             {
-                Response.Redirect("main_content.aspx");
+                place_error.InnerHtml = "There was an error updating place.";
             }
-           /* if (!valid)
-            {
-                place_error.InnerHtml = "Sorry!!!There was an error finding the given place!!";
-            }*/
+
         }
+
+        
     }
 }

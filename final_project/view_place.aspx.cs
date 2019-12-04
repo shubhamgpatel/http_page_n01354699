@@ -11,39 +11,39 @@ namespace final_project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                string placeid = Request.QueryString["placeid"];
-                if (!String.IsNullOrEmpty(placeid))
-                {
-                var db = new HTTP_Places();
-                Dictionary<String, String> place_record = db.FindPlace(Int32.Parse(placeid));
+            HTTP_Places db = new HTTP_Places();
+            view_place_fn(db);
 
-                if (place_record.Count > 0)
-                {
-                    place_title_heading.InnerHtml = place_record["place_title"];
-                    place_title.InnerHtml = place_record["place_title"];
-                    place_desc.InnerHtml = place_record["place_description"];
-                    place_created_on.InnerHtml = place_record["created_on"];
-                    //student_lastname.InnerHtml = place_record["STUDENTLNAME"];
-                    //student_no.InnerHtml = place_record["STUDENTNUMBER"];
-                    //enrolment_date.InnerHtml = place_record["ENROLMENTDATE"];
-                }
-                else
-                {
-                    //valid = false;
-                }
+        }
+        protected void view_place_fn(HTTP_Places hp)
+        {
+            bool valid = true;
+            string place_id = Request.QueryString["placeid"]; // this will grab the value from URL
+            if (String.IsNullOrEmpty(place_id)) valid = false;
+
+            if (valid) {
+
+                Place place_record = hp.FindPlace(Int32.Parse(place_id));
+
+                place_title_heading.InnerHtml = place_record.GetPlacetitle();
+                place_title.InnerHtml = place_record.GetPlacetitle();
+                place_desc.InnerHtml = place_record.GetPlaceDesc();
+                place_created_on.InnerHtml = place_record.Getcreated_on().ToString();
+
             }
             else
             {
-                Response.Redirect("main_content.aspx");
+
+                valid = false;
             }
-            /*
             if (!valid)
             {
-                place_error.InnerHtml = "Sorry!!!There was an error finding that student.";
+                place_title_heading.InnerHtml = "There was an error finding given place.";
             }
-            */
         }
-        protected void DeletePlace_aspx(object sender, EventArgs e)
+           
+
+protected void DeletePlace_aspx(object sender, EventArgs e)
         {
             bool valid = true;
             string placeid = Request.QueryString["placeid"];
@@ -57,6 +57,7 @@ namespace final_project
                 place_connect.DeletePlace(Int32.Parse(placeid));
                 Response.Redirect("main_content.aspx");
             }
+            
         }
     }
 }

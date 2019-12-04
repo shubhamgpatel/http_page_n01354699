@@ -13,6 +13,15 @@ namespace final_project {
     public partial class editplace {
         
         /// <summary>
+        /// edit_place_panel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl edit_place_panel;
+        
+        /// <summary>
         /// place_error control.
         /// </summary>
         /// <remarks>
@@ -40,22 +49,22 @@ namespace final_project {
         protected global::System.Web.UI.WebControls.TextBox edit_place_title;
         
         /// <summary>
-        /// create_description_label control.
+        /// edit_description_label control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label create_description_label;
+        protected global::System.Web.UI.WebControls.Label edit_description_label;
         
         /// <summary>
-        /// create_description control.
+        /// edit_description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox create_description;
+        protected global::System.Web.UI.WebControls.TextBox edit_description;
         
         /// <summary>
         /// created_on_label control.

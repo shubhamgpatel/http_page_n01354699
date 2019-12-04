@@ -16,17 +16,16 @@
         <aside class="menu-sidebar">
             
             <div class="logo">
-                <a href="#">
-                    <img src="images/logo.png" alt="Admin" />
+                <a href="main_content.aspx"><h1>Places Blog</h1>
                 </a>
             </div>
             <div class="menu-sidebar__content">
                 <nav class="navbar-sidebar">
                     <ul class="navbar_list">
-                        <li> <a href="main_content.aspx"><span class="fas fa-tachometer-alt"></span>Dashboard </a></li>
-                        <li><a href="main_content.aspx"><span class="fas fa-chart-bar"></span>Pages</a></li>
-                        <li><span class="fas fa-table"></span>Tables</li>
-                        <li><span class="far fa-check-square"></span>Forms</li>  
+                        <li><a href="main_content.aspx">Dashboard </a></li>
+                        <li><a href="main_content.aspx">Pages</a></li>
+                        <li><a href="#">Tools</a></li>
+                        <li><a href="#">Settings</a></li>  
                     </ul>
                 </nav>
             </div>

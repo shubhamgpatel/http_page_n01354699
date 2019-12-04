@@ -4,17 +4,12 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace final_project
 {
     public class HTTP_Places
     {
-
-        //for connnection we require 4 thinigs
-        // - Connection (URL, port) e.g localhost
-        // - username
-        // - password of phpmyadmin or MAMP
-        // - database name
 
         private static string User { get { return "root"; } }
         private static string Password { get { return ""; } }
@@ -86,17 +81,18 @@ namespace final_project
         }
 
         //function to find a place 
-        public Dictionary<String, String> FindPlace(int Place_Id)
+        public Place FindPlace(int Place_Id)
         {
             //Cnnection string
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
             //create a empty "Place" object so that function can return something if we are not successful while catching place data
-            Dictionary<String, String> Place = new Dictionary<String, String>();
+            Place result_place = new Place();
+            //Dictionary<String, String> Place = new Dictionary<String, String>();
 
             //we will try to grab student data from the database, if we fail, a message will appear in Debug>Windows>Output dialogue
             try
             {
-                //Build a custom query with the id information provided
+                
                 string query = "select * from places where place_id = " + Place_Id;
                 Debug.WriteLine("Connection Initialized...");
                 Connect.Open(); //open method used to open the connection
@@ -106,87 +102,71 @@ namespace final_project
                 MySqlDataReader resultset = cmd.ExecuteReader();
 
                 //Create a list of students (although we're only trying to get 1)
-                List<Dictionary<String, String>> All_Places = new List<Dictionary<String, String>>();
+                List<Place> All_Places = new List<Place>();
 
                 //read through the result set
                 while (resultset.Read())
                 {
-                    //information that will store a single student
-                    Dictionary<String, String> Specific_Place = new Dictionary<String, String>();
-
-                    //Look at each column in the result set row, add both the column name and the column value to our Student dictionary
+                    //information that will store a specific place
+                    Place Specific_Place = new Place();
+                    
                     for (int i = 0; i < resultset.FieldCount; i++)
                     {
-                        Debug.WriteLine("Attempting to transfer data of " + resultset.GetName(i));
-                        Debug.WriteLine("Attempting to transfer data of " + resultset.GetString(i));
-                        Specific_Place.Add(resultset.GetName(i), resultset.GetString(i));
+                        string key = resultset.GetName(i);
+                        string value = resultset.GetString(i);
+                        Debug.WriteLine("Attempting to transfer " + key + " data of " + value);
+                        switch (key)
+                        {
+                            case "place_title":
+                                Specific_Place.SetPlacetitle(value);
+                                break;
+                            case "place_description":
+                                Specific_Place.SetPlaceDes(value);
+                                break;
+                            //case "created_on":
+                                //how to convert a string to a date?
+                                //http://net-informations.com/q/faq/stringdate.html
+                                //https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
+                            //    Specific_Place.Setcreated_on(DateTime.ParseExact(value, "M/d/yyyy hh:mm:ss tt", new CultureInfo("en-US")));
+                              //  break;
+                        }
 
                     }
                     //Add the student to the list of students
                     All_Places.Add(Specific_Place);
                 }
 
-                Place = All_Places[0]; //get the first place array of index 0
+                result_place = All_Places[0]; //get the first place array of index 0
 
             }
             catch (Exception ex)
             {
                 //Something goes wrong in try block  this block will execute i.e catch block
-                Debug.WriteLine("Something went wrong in the find Student method!");
+                Debug.WriteLine("Something went wrong in the find Place method!");
                 Debug.WriteLine(ex.ToString());
             }
 
             Connect.Close();
             Debug.WriteLine("Database Connection Terminated.");
 
-            return Place;
-        }
-        public void UpdatePlace(int placeid, Place update_new_student)
-        {
-            //slightly better way of injecting data into strings
-            //the below technique is known as string formatting. It allows us to make strings without "" + ""
-            string query = "UPDATE places set place_title='{0}', place_description='{1}'";
-            query = String.Format(query, update_new_student.GetPlacetitle(), update_new_student.GetPlaceDesc(), placeid);
-            //The above technique is still sensitive to SQL injection
-            //we will learn about parameterized queries in the 2nd semester
-
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
-            MySqlCommand cmd = new MySqlCommand(query, Connect);
-            try
-            {
-                //Try to update a student with the information provided to us.
-                Connect.Open();
-                cmd.ExecuteNonQuery();
-                Debug.WriteLine("Executed query " + query);
-            }
-            catch (Exception ex)
-            {
-                //If that doesn't seem to work, check Debug>Windows>Output for the below message
-                Debug.WriteLine("Something went wrong in the Update Place Function!");
-                Debug.WriteLine(ex.ToString());
-            }
-
-            Connect.Close();
+            return result_place;
         }
         public void DeletePlace(int placeid)
         {
-           
+
             string remove_place = "Delete from places where place_id = {0}";
             remove_place = String.Format(remove_place, placeid);
 
 
             MySqlConnection Connection = new MySqlConnection(ConnectionString);
-           
+
             //This command removes the particular place from places table
             MySqlCommand cmd_removeplace = new MySqlCommand(remove_place, Connection);
             try
             {
                 //try to execute both commands!
                 Connection.Open();
-                //remember to remove the relational element first
-                cmd_removeplace.ExecuteNonQuery();
-                Debug.WriteLine("Execute delete query " + cmd_removeplace);
-                //then delete the main record
+                //remove the data
                 cmd_removeplace.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + cmd_removeplace);
             }
@@ -199,6 +179,35 @@ namespace final_project
 
             Connection.Close();
         }
+
+        public void UpdatePlace(int placeid, Place update_new_student)
+        {
+            //slightly better way of injecting data into strings
+            //the below technique is known as string formatting. It allows us to make strings without "" + ""
+            string query = "UPDATE places set place_title='{0}', place_description='{1}' where place_id={2}";
+            query = String.Format(query, update_new_student.GetPlacetitle(), update_new_student.GetPlaceDesc(), placeid);
+           
+
+            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            try
+            {
+                //Try to update a student with the information provided to us.
+                Connect.Open();
+                cmd.ExecuteNonQuery();
+                Debug.WriteLine("Executed query " + query);
+                
+            }
+            catch (Exception ex)
+            {
+                //If that doesn't seem to work, check Debug>Windows>Output for the below message
+                Debug.WriteLine("Something went wrong in the Update Place Function!");
+                Debug.WriteLine(ex.ToString());
+            }
+
+            Connect.Close();
+        }
+       
         public void AddPlace(Place new_place)
         {
 

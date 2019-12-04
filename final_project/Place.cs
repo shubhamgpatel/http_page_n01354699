@@ -9,7 +9,7 @@ namespace final_project
     public class Place
     {
         /*
-         These fields are private cannot be accessed normally
+         fields are private cannot be accessed normally
          will NOT be able to 
             set like Student.Fname = "Christine"
             get like Student.Fname ==> returns "Christine"
@@ -41,6 +41,7 @@ namespace final_project
         //These methods are used to set values in an object
         //i.e. if I want to change the last name to Bittle
         //student.SetLname("Bittle")
+      
         public void SetPlacetitle(string value)
         {
             Page_title = value;
