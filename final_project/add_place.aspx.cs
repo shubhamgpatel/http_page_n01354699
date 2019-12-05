@@ -11,11 +11,12 @@ namespace final_project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //as there is nothing to load
+            // we are adding new entry
         }
         protected void Add_Place(object sender, EventArgs e)
         {
-            //create connection
+            //create connection using HTTP Place class file
             HTTP_Places place1 = new HTTP_Places();
             //create a new particular place
             Place new_place = new Place();
@@ -23,9 +24,8 @@ namespace final_project
 
             new_place.SetPlacetitle(create_place_title.Text);
             new_place.SetPlaceDes(create_description.Text);
-            
-           new_place.Setcreated_on(DateTime.Now);
 
+            new_place.Setcreated_on(DateTime.Now); // set real time of system in created_on column
 
             //https://support.microsoft.com/en-ca/help/323246/how-to-upload-a-file-to-a-web-server-in-asp-net-by-using-visual-c-net
             /*try

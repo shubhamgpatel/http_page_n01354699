@@ -1,57 +1,66 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="places.Master.cs" Inherits="final_project.wordpress" %>
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html>
-<head runat="server">
-    <link href="Content/style.css" rel="stylesheet" type="text/css" />
-    <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <title>Dashboard</title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
-</head>
-<body>
-    <div class="header">
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar">
-            
-            <div class="logo">
-                <a href="main_content.aspx"><h1>Places Blog</h1>
+    <html>
+
+    <head runat="server">
+        <link href="Content/style.css" rel="stylesheet" type="text/css" />
+        <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <title>Dashboard</title>
+        <asp:ContentPlaceHolder ID="head" runat="server">
+        </asp:ContentPlaceHolder>
+    </head>
+
+    <body>
+        <div class="header">
+            <!-- Menu side-->
+            <aside class="menu-sidebar">
+
+                <div class="logo">
+                    <a href="main_content.aspx"><h1>Places Blog</h1>
                 </a>
-            </div>
-            <div class="menu-sidebar__content">
-                <nav class="navbar-sidebar">
-                    <ul class="navbar_list">
-                        <li><a href="main_content.aspx">Dashboard </a></li>
-                        <li><a href="main_content.aspx">Pages</a></li>
-                        <li><a href="#">Tools</a></li>
-                        <li><a href="#">Settings</a></li>  
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-        <header class="header-desktop">
+                </div>
+                <div class="menu-sidebar__content">
+                    <nav class="navbar-sidebar">
+                        <ul class="navbar_list">
+                            <li><a href="main_content.aspx">Dashboard </a>
+                            </li>
+                            <li><a href="main_content.aspx">Pages</a>
+                            </li>
+                            <li><a href="#">Tools</a>
+                            </li>
+                            <li><a href="#">Settings</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <!-- END Menu-->
+            <header class="header-desktop">
                 <div class="section__content">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                         <img src="images/logo.jpg" class="admin_img" alt="Admin Photo" />
-                       
+                            <img src="images/logo.jpg" class="admin_img" alt="Admin Photo" />
+
                         </div>
                     </div>
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-    </div>
- 
-    <form id="form1" runat="server">
-         <aside class="main_content ">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-        </aside>
-    </form>
-    <footer>
+        </div>
 
-    </footer>
-</body>
-</html>
+        <form id="form1" runat="server">
+            <aside class="main_content ">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">    
+                    <!-- all the content will be loaded in this area -->
+                    <!-- contentplaceholder id is important -->
+                </asp:ContentPlaceHolder>
+            </aside>
+        </form>
+        <footer>
+            <p>Copyright &copy; Place Database</p>
+        </footer>
+    </body>
+
+    </html>

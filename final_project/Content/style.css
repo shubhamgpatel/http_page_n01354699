@@ -174,8 +174,11 @@ ul.navbar_list{
     width: 24%;
     display: block;
 }
-.panel-heading h1{
-    display:inline-block;
+.delete_btn_view{
+    width:100%;
+}
+.panel-heading h1,h2 {
+    display: inline-block;
 }
 .search_btn {
     padding: 2px 8px 2px 8px;
@@ -199,4 +202,21 @@ ul.navbar_list{
 }
 #place_title_heading{
     display:inline-block;
+}
+.glyphicon-edit{
+    font-size:18px;
+}
+.update_btn {
+    width: 35%;
+    margin: 0 auto;
+    display: block;
+    padding: 4px 0 4px 0;
+}
+footer p {
+    background-color: #337ab7;
+    color: #fff;
+    text-align: center;
+    padding: 7px 0 7px 0;
+    width: 900px;
+    float: right;
 }

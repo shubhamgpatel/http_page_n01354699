@@ -28,7 +28,7 @@ namespace final_project
             //We will attempt to get the record we need
             if (valid)
             {
-
+                // this function will get the values from database and set in textbox
                 Place place_record = hp.FindPlace(Int32.Parse(place_id));
                 edit_place_title.Text = place_record.GetPlacetitle();
                 edit_description.Text = place_record.GetPlaceDesc();
@@ -39,6 +39,7 @@ namespace final_project
             if (!valid)
             {
                 edit_place_panel.InnerHtml = "There was an error finding that place.";
+                Response.Redirect("main_content.aspx"); //if someone directly try to access edit file it is not possible so we redirect to main content page
             }
         }
         protected void edit_place(object sender, EventArgs e)

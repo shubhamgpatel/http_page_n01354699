@@ -14,19 +14,34 @@ namespace final_project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            place_result.InnerHtml = "";
-            string searchkey = "";
+            /*------ this area is for delete part ------------------*/
+                bool valid = true;
+                string placeid = Request.QueryString["placeid"];
+                if (String.IsNullOrEmpty(placeid)) valid = false;
+
+                HTTP_Places place_connect1 = new HTTP_Places();
+                //deleting the student from the system
+                if (valid)
+                {
+                Response.Write("alert('confirm to delete ?')");
+                place_connect1.DeletePlace(Int32.Parse(placeid));
+                    Response.Redirect("main_content.aspx");
+                }
+            /*------ this area is for delete part ------------------*/
+
+            place_result.InnerHtml = ""; //empty string to remove ppast data
+            string searchplace = ""; // for searching the string
             if (Page.IsPostBack)
             {
-                searchkey = place_search.Text;
+                searchplace = place_search.Text;
             }
 
-            string query = "select * from places";
+            string query = "SELECT * FROM places";
 
-            if (searchkey != "")
+            if (searchplace != "")
             {
-                query += " WHERE place_title like '%" + searchkey + "%' ";
-                query += " or place_description like '%" + searchkey + "%' ";
+                query += " WHERE place_title like '%" + searchplace + "%' ";
+                query += " or place_description like '%" + searchplace + "%' ";
             }
 
             var db_connect = new HTTP_Places();
@@ -37,23 +52,13 @@ namespace final_project
                 place_result.InnerHtml += "<tr>";
 
                 string PlaceId = row["place_id"];
-                place_result.InnerHtml += "<td> "+ PlaceId + "</td>";
+                place_result.InnerHtml += "<td> " + PlaceId + "</td>";
 
                 string Placename = row["place_title"];
                 place_result.InnerHtml += "<td><a href=\"view_place.aspx?placeid=" + PlaceId + "\">" + Placename + "</a></td>";
 
                 string PlaceDesc = row["place_description"];
-                //since the description is long content used substring function to decrease the content
-                //if (PlaceDesc == "" || PlaceDesc == "NULL")    // if the string is empty
-                //{
-                    //place_result.InnerHtml += "<td class='place_desc_subs'>" + PlaceDesc + "</td>";
-                //}
-                //else{
-                   // string PlaceDesc_Sub = PlaceDesc.Substring(0, 50) + "...."; //if will display only 50 charcters
-                   // place_result.InnerHtml += "<td class='place_desc_subs'>" + PlaceDesc_Sub + "</td>";
 
-                //}
-                
                 string CreatedOn = row["created_on"];
                 place_result.InnerHtml += "<td>" + CreatedOn + "</td>";
 
@@ -61,30 +66,29 @@ namespace final_project
                 //place_connect.DeletePlace(Int32.Parse(PlaceId));
 
                 place_result.InnerHtml += "<td><a href=\"editplace.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-edit\"></span></a></td>";
-                place_result.InnerHtml += "<td><input type=\"submit\"  onsubmit=\"DeletePlace_aspx(" + PlaceId +")\"/><span class=\"glyphicon glyphicon-trash\"></span></td>";
+               // place_result.InnerHtml += "<td><input type=\"submit\"  onsubmit=\"DeletePlace_aspx(" + PlaceId + ")\"/><span class=\"glyphicon glyphicon-trash\"></span></td>";
+                place_result.InnerHtml += "<td><a href=\"main_content.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
 
                 place_result.InnerHtml += "</tr>";
             }
             place_result.InnerHtml += "</table>";
 
         }
-        protected void DeletePlace_aspx(int PlaceId)
+        /*
+        protected void DeletePlace_aspx(object sender, EventArgs e)
         {
-            //bool valid = true;
-            //string placeid = Request.QueryString["placeid"];
-            //if (String.IsNullOrEmpty(placeid)) valid = false;
+            bool valid = true;
+            string placeid = Request.QueryString["placeid"];
+            if (String.IsNullOrEmpty(placeid)) valid = false;
 
             HTTP_Places place_connect = new HTTP_Places();
-
+            Console.WriteLine("place id " + placeid);
             //deleting the student from the system
-            //if (valid)
-           // {
-                place_connect.DeletePlace(PlaceId);
-                Response.Redirect("main_content.aspx");
-            //}
-
-        }
-
-
+            if (valid)
+             {
+            place_connect.DeletePlace(Int32.Parse(placeid));
+            Response.Redirect("main_content.aspx");
+            }
+        }*/
     }
 }
