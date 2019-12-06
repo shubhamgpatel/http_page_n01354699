@@ -58,24 +58,25 @@ namespace final_project
 
         //for getting result set we use dictionaries which has Key and Value e.g (First_name)key : (Simon)value
 
-        public List<Dictionary<String, String>> List_Query(string query) // 2 string used because one for key and other for value
+        public List<Dictionary<String, String>> List_query(string query) // 2 string used because one for key and other for value
+            //public List List_query(row,column)
+            //christine lab reference
         {
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            MySqlConnection Connection = new MySqlConnection(ConnectionString);
 
             List<Dictionary<String, String>> ResultSet = new List<Dictionary<String, String>>();
 
             // try catch block to do everything  where inside try used to execute something and if any error arise catch is used.
             try
             {
-                Debug.WriteLine("Connection Initialize");
+                Debug.WriteLine("Connection Initialized");
                 Debug.WriteLine("Attempt to execute query " + query);
                 //open method to start db connection
-                Connect.Open();
+                Connection.Open();
                 //give the connection a query
-                MySqlCommand cmd = new MySqlCommand(query, Connect);
+                MySqlCommand cmd = new MySqlCommand(query, Connection);
                 //get the result set
                 MySqlDataReader resultset = cmd.ExecuteReader();
-
 
                 // while loop used to get value of columns
                 while (resultset.Read())
@@ -95,12 +96,12 @@ namespace final_project
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Something went wrong while establishing the connnection!");
+                Debug.WriteLine("Something went wrong while establishing the connnection!!");
                 Debug.WriteLine(ex.ToString());
 
             }
-            Connect.Close();
-            Debug.WriteLine("Database Connection Terminated.");
+            Connection.Close();
+            Debug.WriteLine("Database Connection Terminated!!");
 
             return ResultSet;
         }
@@ -148,12 +149,12 @@ namespace final_project
                             case "place_description":
                                 Specific_Place.SetPlaceDes(value);
                                 break;
-                                //case "created_on":
+                            case "created_on":
                                 //how to convert a string to a date?
                                 //http://net-informations.com/q/faq/stringdate.html
-                               ///https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
-                                   // Specific_Place.Setcreated_on(DateTime.ParseExact(value, "M/d/yyyy hh:mm:ss tt", new CultureInfo("en-US")));
-                                  //break;
+                                ///https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
+                                Specific_Place.Setcreated_on(value);
+                                  break;
                         }
 
                     }
@@ -234,7 +235,7 @@ namespace final_project
         {
 
             string query = "INSERT INTO places (place_title, place_description, created_on) values ('{0}','{1}','{2}')";
-            query = String.Format(query, new_place.GetPlacetitle(), new_place.GetPlaceDesc(), new_place.Getcreated_on().ToString("yyyy-MM-dd H:mm:ss"));
+            query = String.Format(query, new_place.GetPlacetitle(), new_place.GetPlaceDesc(), new_place.Getcreated_on());
 
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString); //connnection string

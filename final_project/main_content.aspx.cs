@@ -30,6 +30,7 @@ namespace final_project
             /*------ this area is for delete part ------------------*/
 
             place_result.InnerHtml = ""; //empty string to remove ppast data
+            no_result.InnerHtml = "";
             string searchplace = ""; // for searching the string
             if (Page.IsPostBack)
             {
@@ -45,34 +46,40 @@ namespace final_project
             }
 
             var db_connect = new HTTP_Places();
-            List<Dictionary<String, String>> result_set = db_connect.List_Query(query);
+            List<Dictionary<String, String>> result_set = db_connect.List_query(query);
             place_result.InnerHtml += "<table class=\"table table-hover\"><tr><th>Place ID</th><th>Place Title</th><th>Created on Date</th><th>Edit</th><th>Delete</th>";
-            foreach (Dictionary<String, String> row in result_set)
+            if (result_set.Count > 0)
             {
-                place_result.InnerHtml += "<tr>";
+                foreach (Dictionary<String, String> row in result_set)
+                {
+                    place_result.InnerHtml += "<tr>";
 
-                string PlaceId = row["place_id"];
-                place_result.InnerHtml += "<td> " + PlaceId + "</td>";
+                    string PlaceId = row["place_id"];
+                    place_result.InnerHtml += "<td> " + PlaceId + "</td>";
 
-                string Placename = row["place_title"];
-                place_result.InnerHtml += "<td><a href=\"view_place.aspx?placeid=" + PlaceId + "\">" + Placename + "</a></td>";
+                    string Placename = row["place_title"];
+                    place_result.InnerHtml += "<td><a href=\"view_place.aspx?placeid=" + PlaceId + "\">" + Placename + "</a></td>";
 
-                string PlaceDesc = row["place_description"];
+                    string PlaceDesc = row["place_description"];
 
-                string CreatedOn = row["created_on"];
-                place_result.InnerHtml += "<td>" + CreatedOn + "</td>";
+                    string CreatedOn = row["created_on"];
+                    place_result.InnerHtml += "<td>" + CreatedOn + "</td>";
 
-                HTTP_Places place_connect = new HTTP_Places();
-                //place_connect.DeletePlace(Int32.Parse(PlaceId));
+                    HTTP_Places place_connect = new HTTP_Places();
+                    //place_connect.DeletePlace(Int32.Parse(PlaceId));
 
-                place_result.InnerHtml += "<td><a href=\"editplace.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-edit\"></span></a></td>";
-               // place_result.InnerHtml += "<td><input type=\"submit\"  onsubmit=\"DeletePlace_aspx(" + PlaceId + ")\"/><span class=\"glyphicon glyphicon-trash\"></span></td>";
-                place_result.InnerHtml += "<td><a href=\"main_content.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
+                    place_result.InnerHtml += "<td><a href=\"editplace.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-edit\"></span></a></td>";
+                    // place_result.InnerHtml += "<td><input type=\"submit\"  onsubmit=\"DeletePlace_aspx(" + PlaceId + ")\"/><span class=\"glyphicon glyphicon-trash\"></span></td>";
+                    place_result.InnerHtml += "<td><a href=\"main_content.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
 
-                place_result.InnerHtml += "</tr>";
+                    place_result.InnerHtml += "</tr>";
+                }
+                place_result.InnerHtml += "</table>";
             }
-            place_result.InnerHtml += "</table>";
-
+            else
+            {
+                no_result.InnerHtml = "No places found!!!";
+            }
         }
         /*
         protected void DeletePlace_aspx(object sender, EventArgs e)

@@ -30,8 +30,8 @@ namespace final_project
                 place_title_heading.InnerHtml = place_record.GetPlacetitle();
                 place_title.InnerHtml = place_record.GetPlacetitle();
                 place_desc.InnerHtml = place_record.GetPlaceDesc();
-                place_created_on.InnerHtml = place_record.Getcreated_on().ToString();
-                Console.WriteLine(place_record.Getcreated_on().ToString());
+                place_created_on.InnerHtml = place_record.Getcreated_on();
+                Console.WriteLine(place_record.Getcreated_on());
                 Debug.WriteLine("Database Connection Terminated.");
             }
             else

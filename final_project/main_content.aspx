@@ -9,9 +9,11 @@
             </div>
             <div class="search_place">
                 <asp:TextBox ID="place_search" placeholder="Type here" class="search_textbar" runat="server"></asp:TextBox>
+        
                 <asp:Button runat="server" class="search_btn" text="Search" />
             </div>
             <div id="place_result" runat="server"></div>
+            <div id="no_result" runat="server"></div>
         </div>
 
     </asp:Content>

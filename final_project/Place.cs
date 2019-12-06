@@ -17,7 +17,7 @@ namespace final_project
         private int Place_id;
         private string Page_title;
         private string Page_description;
-        private DateTime created_on;
+        private string created_on;
 
 
         public int GetPlaceId()
@@ -33,14 +33,13 @@ namespace final_project
             return Page_description;
         }
 
-        public DateTime Getcreated_on()
+        public string Getcreated_on()
         {
             return created_on;
         }
 
-        //These methods are used to set values in an object
-        //i.e. if I want to change the last name to Bittle
-        //student.SetLname("Bittle")
+        //Methods used to set and get values in an object
+        //example - Place.SetPlacetitle("John")
       
         public void SetPlacetitle(string value)
         {
@@ -51,7 +50,7 @@ namespace final_project
             Page_description = value;
         }
 
-        public void Setcreated_on(DateTime value)
+        public void Setcreated_on(string value)
         {
             created_on = value;
         }

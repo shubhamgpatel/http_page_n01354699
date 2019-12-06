@@ -18,16 +18,19 @@ namespace final_project
         {
             //create connection using HTTP Place class file
             HTTP_Places place1 = new HTTP_Places();
-            //create a new particular place
+            //create a new particular place where we can put values in tables
             Place new_place = new Place();
 
-
+            //object.method(ID.Text)
             new_place.SetPlacetitle(create_place_title.Text);
             new_place.SetPlaceDes(create_description.Text);
-
-            new_place.Setcreated_on(DateTime.Now); // set real time of system in created_on column
+            //https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
+            // converting datetime to sttring
+            new_place.Setcreated_on(DateTime.Now.ToString("yyyy’-‘MM’-‘dd’ ’HH’:’mm’:’ss")); // set real time of system in created_on column
 
             //https://support.microsoft.com/en-ca/help/323246/how-to-upload-a-file-to-a-web-server-in-asp-net-by-using-visual-c-net
+            //tried to use upload but didnt worked well
+            //will learn more and try to make it more properly
             /*try
             {
                 if ((image_url_upload != null) && (image_url_upload.PostedFile.ContentLength > 0))
@@ -52,7 +55,9 @@ namespace final_project
             */
 
             //add the student to the database
+            //object_instace.method(passing_new_place)
             place1.AddPlace(new_place);
+            // after adding in database redirecting to main content
             Response.Redirect("main_content.aspx");
         }
 

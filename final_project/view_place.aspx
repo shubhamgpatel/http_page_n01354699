@@ -12,7 +12,7 @@
 
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-8 col-lg-8 col-sm-8 view_place_content">
+                    <div class="col-md-12 col-lg-12 col-sm-12 view_place_content">
 
 
                         <dl class="dl-horizontal" runat="server">
