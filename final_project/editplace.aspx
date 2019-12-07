@@ -18,7 +18,7 @@
                         </div>
                         <div>
                             <asp:Label ID="edit_description_label" Text="Place Description:" runat="server"></asp:Label>
-                            <asp:TextBox ID="edit_description" placeholder="Enter Description(optional)" class="form-control" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="edit_description"  TextMode="MultiLine" Rows="10" placeholder="Enter Description(optional)" class="form-control edit_desc" runat="server"></asp:TextBox>
                         </div>
                         <div>
                             <!--

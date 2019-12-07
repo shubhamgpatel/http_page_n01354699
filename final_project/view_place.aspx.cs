@@ -31,6 +31,7 @@ namespace final_project
                 place_title.InnerHtml = place_record.GetPlacetitle();
                 place_desc.InnerHtml = place_record.GetPlaceDesc();
                 place_created_on.InnerHtml = place_record.Getcreated_on();
+                view_edit_btn.InnerHtml = "<a href='editplace.aspx?placeid="+ place_id + "'>  <span class=\"glyphicon glyphicon-edit edit_view\"></span></a>";
                 Console.WriteLine(place_record.Getcreated_on());
                 Debug.WriteLine("Database Connection Terminated.");
             }

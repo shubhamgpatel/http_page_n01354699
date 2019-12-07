@@ -7,9 +7,12 @@
                 <div class="panel-heading">
                     <a href="main_content.aspx" title="View Places!!"><span class="glyphicon glyphicon-chevron-left"></span></a>
                     <h1>Place :<span id="place_title_heading" runat="server"></span></h1>
+                   
+
+                    <span id="view_edit_btn" runat="server"></span>
 
                     <span class="panel_date">Created on : <span id="place_created_on" runat="server"> </span></span>
-
+                   
                 </div>
                 <div class="panel-body">
                     <div class="col-md-12 col-lg-12 col-sm-12 view_place_content">

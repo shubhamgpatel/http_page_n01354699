@@ -68,7 +68,7 @@ namespace final_project
                     HTTP_Places place_connect = new HTTP_Places();
                     //place_connect.DeletePlace(Int32.Parse(PlaceId));
 
-                    place_result.InnerHtml += "<td><a href=\"editplace.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-edit\"></span></a></td>";
+                    place_result.InnerHtml += "<td><a href=\"editplace.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-edit edit_view\"></span></a></td>";
                     // place_result.InnerHtml += "<td><input type=\"submit\"  onsubmit=\"DeletePlace_aspx(" + PlaceId + ")\"/><span class=\"glyphicon glyphicon-trash\"></span></td>";
                     place_result.InnerHtml += "<td><a href=\"main_content.aspx?placeid=" + PlaceId + "\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
 

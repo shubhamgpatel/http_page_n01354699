@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -58,9 +59,19 @@ namespace final_project
                 //set that student data
                 //object.method(id.text);
                 //id the html document id which we will grab by using text property
-                edit_place.SetPlacetitle(edit_place_title.Text);
-                edit_place.SetPlaceDes(edit_description.Text);
+                //removing escape character 
+                var remove_escape_char_title = edit_place_title.Text;
+                remove_escape_char_title.Replace("'","\"");
 
+                var remove_escape_char_desc = edit_description.Text;
+                remove_escape_char_desc.Replace("'", "\"");
+
+                edit_place.SetPlacetitle(remove_escape_char_title);
+                edit_place.SetPlaceDes(remove_escape_char_desc);
+                Console.WriteLine(edit_place_title.Text);
+
+
+                Debug.WriteLine(edit_place_title.Text);
                 //add the student to the database
                 try
                 {

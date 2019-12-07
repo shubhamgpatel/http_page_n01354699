@@ -207,10 +207,13 @@ namespace final_project
         public void UpdatePlace(int placeid, Place update_new_student) //2 parameter int and object itself which has variable
         // place title, description and created_on
         {
-            string query = "UPDATE places set place_title='{0}', place_description='{1}' where place_id={2}";
+            string query = "UPDATE places set place_title=\"{0}\", place_description=\"{1}\" where place_id={2}";
+            // var remove_escape_char = update_new_student.GetPlacetitle();
+            // if (remove_escape_char === "'") {
+            //}
             query = String.Format(query, update_new_student.GetPlacetitle(), update_new_student.GetPlaceDesc(), placeid);
-
-
+            Debug.WriteLine(query);
+            
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand(query, Connect);
             try

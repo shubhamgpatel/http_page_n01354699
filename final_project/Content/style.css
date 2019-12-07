@@ -16,10 +16,14 @@
 .logo a:hover{
     text-decoration:none;
 }
+.edit_view{
+    color:#fff;
+    background-color:#fff;
+}
 .main_content {
     width: 900px;
     margin-left: 300px;
-    margin-top:70px;
+    margin-top: 70px;
 }
 .menu-sidebar {
     width: 300px;
@@ -143,6 +147,8 @@ ul.navbar_list{
     margin: 0 auto;
     border: 2px solid #337ab7;
     border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .add_place {
     margin-left: 10px;
@@ -179,6 +185,7 @@ ul.navbar_list{
 }
 .panel-heading h1,h2 {
     display: inline-block;
+    font-size:30px!important;
 }
 .search_btn {
     padding: 2px 8px 2px 8px;
@@ -203,8 +210,14 @@ ul.navbar_list{
 #place_title_heading{
     display:inline-block;
 }
-.glyphicon-edit{
-    font-size:18px;
+.edit_view{
+    font-size: 21px;
+    color: #fff;
+    float: right;
+    margin-top: 35px;
+}
+.edit_desc{
+    resize:none;
 }
 .update_btn {
     width: 35%;

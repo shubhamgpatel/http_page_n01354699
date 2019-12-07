@@ -22,6 +22,15 @@ namespace final_project {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl place_title_heading;
         
         /// <summary>
+        /// view_edit_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl view_edit_btn;
+        
+        /// <summary>
         /// place_created_on control.
         /// </summary>
         /// <remarks>
